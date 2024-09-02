@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 public class LoginGUI extends JFrame {
 	private JFrame frame = new JFrame("Login");
 
+    private static final String USERNAME = "noemi";
+    private static final String PASSWORD ="1234";
 	public LoginGUI(){
 
 		this.frame.setSize(300, 150);
@@ -21,7 +23,7 @@ public class LoginGUI extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
-		Utent utent = new Utent("noemi","1234");
+		Utent utent = new Utent(USERNAME,PASSWORD);
 		JLabel usernameLabel = new JLabel("Username");
         JTextField usernameField = new JTextField(); 
 		panel.add(usernameLabel);

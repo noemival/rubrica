@@ -107,21 +107,5 @@ public class AddressBookDb {
 
 }
 
-    /*
-    public AddressBook deleteContact(int index) {
-        
-        trovare il file con l'indice index, eliminare e cambiare il numero a tutti 
-        
-    }
-    public AddressBook modifyContact(int index) {
-        
-        trovare il file con l'indice index,modificare il file
-        
-    }
-    public AddressBook addContact(int index) {
-        
-        trovare il file con l'indice index,modificare il file
-        
-    }
-    */
+
  
