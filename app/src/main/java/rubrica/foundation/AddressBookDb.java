@@ -6,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import model.AddressBook;
 import model.Person;
@@ -80,11 +84,16 @@ public class AddressBookDb {
        }
     }
       
+
     public AddressBook loadDataDir() {
-        AddressBook addressBook = new AddressBook();       
+        AddressBook addressBook = new AddressBook(); 
+        List<Integer> index = new ArrayList<>(); 
         File[] files = directory.listFiles();
+
         if (files != null) {
+
             for (File file : files) {
+                index.add(extractNumber(file.getName()));
                 if (file.isFile()) {
                     try (Scanner scanner = new Scanner(file)) {
                         while(scanner.hasNextLine()) {
@@ -101,10 +110,20 @@ public class AddressBookDb {
             }           
         
         }
+        AddressBook.sortPeopleByOrderList(addressBook.getPeople(), index);
         return addressBook;
 
     }
 
+    public static int extractNumber(String str) {
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(str);
+
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group());
+        }
+        return -1;
+    }
 }
 
 

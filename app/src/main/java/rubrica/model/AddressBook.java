@@ -1,5 +1,6 @@
 package model;
-import java.util.Vector;
+import java.util.*;
+
 
 import javax.swing.table.AbstractTableModel;
 
@@ -9,8 +10,15 @@ public class AddressBook extends AbstractTableModel {
     private String[] columnNames = { "Name", "Surname", "Telephone" };
 
     public AddressBook(){
-
     }    
+
+    public Vector<Person> getPeople() {
+        return this.people;
+    }
+
+    public void setPeople(Vector<Person> people) {
+        this.people = people;
+    }
     
     public void addContact(Person person) {
         people.add(person);
@@ -39,7 +47,6 @@ public class AddressBook extends AbstractTableModel {
     }
 
     public Person getContact(int index) {
-        // Verifica se l'indice è valido
         if (index >= 0 && index < people.size()) {
             Person person = people.get(index);
             System.out.println("Person at index " + index + ": " + person);
@@ -48,24 +55,34 @@ public class AddressBook extends AbstractTableModel {
             return null;
         }
     }
-    public Vector<Person> getPeople() {
-        return people;
+    public static void sortPeopleByOrderList(Vector<Person> people, List<Integer> orderList) {
+        Map<Person, Integer> positionMap = new HashMap<>();
+        for (int i = 0; i < orderList.size(); i++) {
+            if (i < people.size()) {
+                positionMap.put(people.get(i), orderList.get(i));
+            }
+        }
+
+        Collections.sort(people, new Comparator<Person>() {
+            @Override
+            public int compare(Person p1, Person p2) {
+                int pos1 = positionMap.getOrDefault(p1, Integer.MAX_VALUE);
+                int pos2 = positionMap.getOrDefault(p2, Integer.MAX_VALUE);
+                return Integer.compare(pos1, pos2);
+            }
+        });
     }
 
-
-    // Restituisce il numero di righe (quanti oggetti ci sono)
     @Override
     public int getRowCount() {
         return people.size();
     }
 
-    // Restituisce il numero di colonne (quante proprietà dell'oggetto vogliamo visualizzare)
     @Override
     public int getColumnCount() {
         return columnNames.length;
     }
 
-    // Restituisce il nome della colonna
     @Override
     public String getColumnName(int columnIndex) {
         return columnNames[columnIndex];

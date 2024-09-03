@@ -1,6 +1,7 @@
 package model;
 public class Person {
-    
+
+    public int id;
     public String name;
     public String surname;
     public String address;
@@ -15,6 +16,14 @@ public Person(String name, String surname, String address, String telephone, int
     this.age=age;
 }
 
+
+public int getId() {
+    return id;
+}
+
+public void setId(int id) {
+    this.id = id;
+}
 public String getName() {
     return name;
 }

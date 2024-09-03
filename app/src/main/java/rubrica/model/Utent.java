@@ -1,7 +1,7 @@
 package model;
 
 public class Utent{
-    
+    public int id;
     public String username;
     public String password;
 
@@ -10,6 +10,12 @@ public Utent(String username, String password){
     this.password= password;
 }
 
+public int getId() {
+    return id;
+}
+public void setId(int id) {
+    this.id = id;
+}
 public String getUsername() {
     return username;
 }
